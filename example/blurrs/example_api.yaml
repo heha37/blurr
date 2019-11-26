@@ -1,0 +1,44 @@
+envs:
+  - RedisEnv
+
+testCases:
+  - name: "save user nickname successful"
+    method: POST
+    path: "http://127.0.0.1:8080/users/1/nickname"
+    headers:
+      Content-Type: "application/x-www-form-urlencoded"
+      Accept-Type: "application/json"
+    request:
+      nickname=tester
+    response:
+      code: 200
+      data: |
+        {
+          "nickname": "tester"
+        }
+
+  - name: "if get none exist user nickname"
+    method: GET
+    path: "http://127.0.0.1:8080/users/2/nickname"
+    headers:
+      Content-Type: "application/json"
+      Accept-Type: "application/json"
+    response:
+      code: 200
+      data: |
+        {
+          "nickname": "tester"
+        }
+
+  - name: "get `me` nickname"
+    method: GET
+    path: "http://127.0.0.1:8080/users/100/nickname"
+    headers:
+      Content-Type: "application/json"
+      Accept-Type: "application/json"
+    response:
+      code: 200
+      data: |
+        {
+          "nickname": "me"
+        }
